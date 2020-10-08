@@ -23,64 +23,63 @@
 
 
 // PSEUDOCODE
-// Input: nums = [-1,0,1,2,-1,-4]
 
-// SORT THE NUMS IN ORDER FIRST 
-// [-4, -1, -1, 0, 1, 2]
+//Input: nums = [-1,0,1,2,-1,-4]
+//initiate an empty array and push the combination here.
 
-// i will start at the beginning
-// j will start 1 after i
-// k will start at the end 
+//if nums.length is less than or equal to 1, return [].
 
+// 3 for loops. i will be the first number; j will the i+1; k will the last number
+//the result will be [-1, 0, -4], [-1, 1, -4], [-1,2,-4], [-1, -1, -4]
+//the result will be [0, 1, -4], [0, 2, -4], [0, -1, -4], [0, -1, -4]
+// etc
 
-// OUTPUT?
-// [ [ -4 ], [ -1 ], [ 2 ] ],
-// [ [ -4 ], [ -1 ], [ 2 ] ],
-// [ [ -4 ], [ 0 ], [ 2 ] ],
-// [ [ -4 ], [ 1 ], [ 2 ] ],
-// [ [ -4 ], [ 2 ], [ 2 ] ],
-// [ [ -1 ], [ -1 ], [ 2 ] ],
-// [ [ -1 ], [ 0 ], [ 2 ] ],
-// [ [ -1 ], [ 1 ], [ 2 ] ],
-// [ [ -1 ], [ 2 ], [ 2 ] ],
-// [ [ -1 ], [ 0 ], [ 2 ] ],
-// [ [ -1 ], [ 1 ], [ 2 ] ],
-// [ [ -1 ], [ 2 ], [ 2 ] ],
-// [ [ 0 ], [ 1 ], [ 2 ] ],
-// [ [ 0 ], [ 2 ], [ 2 ] ],
-// [ [ 1 ], [ 2 ], [ 2 ] ]
+// sort the result in lowest to highest number
+
+// get rid of the duplicates
+
+// if addition of three numbers = 0, only return the number.
+
+// *******************************************************************************************************************************************************
 
 
-// IF THERE IS A DUPLICATE, GET RID OF THE DUPLICATE
-
-//IF [i+j+k]= 0, PUT IT IN THE EMPTY ARRAY AND RETURN IT!
 
 // CODE 
 var threeSum = function (nums) {
+  let emptyArray = [];
 
-  let emptyArray = []
-
-  nums.sort(function (a, b) {
-    return a - b
-  });
-
-  if (nums.length < 2) {
+  if (nums.length <= 1) {
     return [];
   }
 
-  for (let i = 0; i < nums.length - 2; i++) {
-    let numberOne = [nums[i]];
-    for (let j = i + 1; j < nums.length - 1; j++) {
-      let numberTwo = [nums[j]];
-      for (let k = (j + 1); k < nums.length; k++) {
-        let numberThree = [nums[k]];
-        if (numberOne + numberTwo + numberThree === 0) {
-          emptyArray.push([numberOne, numberTwo, numberThree])
-        }
-      }  
-    } 
-  }
-    return emptyArray
-  }
+  nums.sort((a, b) => a - b);
+  // console.log(nums)
+  
+  for (let i = 0; i < (nums.length - 2); i++) {
+    let firstNumber = nums[i];
 
+    for (let j = (i + 1); j < (nums.length - 1); j++) {
+      let secondNumber = nums[j];
+
+      for (let k = (nums.length - 1); k < nums.length; k++) {
+        let thirdNumber = nums[k];
+
+        emptyArray.push([firstNumber, secondNumber, thirdNumber]);
+      }
+    }
+  }
+  
+      return Array.from(new Set(emptyArray))
+}
+
+// console.log(threeSum([0]))
 console.log(threeSum([-1,0,1,2,-1,-4])) 
+
+
+
+
+
+
+// arr = arr.filter (function (value, index, array) { 
+//   return array.indexOf (value) == index;
+// });
