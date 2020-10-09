@@ -47,12 +47,15 @@
 // CODE 
 var threeSum = function (nums) {
   let emptyArray = [];
+  let noDuplicates = [];
+  let hash = {}
+
 
   if (nums.length <= 1) {
     return [];
   }
 
-  nums.sort((a, b) => a - b);
+  // nums.sort((a, b) => a - b);
   // console.log(nums)
   
   for (let i = 0; i < (nums.length - 2); i++) {
@@ -64,16 +67,26 @@ var threeSum = function (nums) {
       for (let k = (nums.length - 1); k < nums.length; k++) {
         let thirdNumber = nums[k];
 
-        emptyArray.push([firstNumber, secondNumber, thirdNumber]);
+        // if (firstNumber + secondNumber + thirdNumber === 0) {
+          emptyArray.push([firstNumber, secondNumber, thirdNumber]);
+        // }
       }
     }
   }
   
-      return Array.from(new Set(emptyArray))
+  // emptyArray.forEach(set => {
+  //   if (!hash[set]) {
+  //     hash[set] = 1
+  //     noDuplicates.push(set)
+  //   }
+  // })
+
+  // return noDuplicates
+  return emptyArray
 }
 
 // console.log(threeSum([0]))
-console.log(threeSum([-1,0,1,2,-1,-4])) 
+console.log(threeSum( [-1,0,1,2,-1,-4])) 
 
 
 
